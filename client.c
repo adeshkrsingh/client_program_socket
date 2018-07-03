@@ -26,6 +26,9 @@ void *myThreadFun(void *vargp)
                 printf("retrying connection....\n");
                 sleep(1);
                 continue;
+            } else {
+                printf("Successfully connected...\n");
+                sockfd_status = 1;
             }
         } else {
             sleep(5);
@@ -49,11 +52,11 @@ int main(int argc, char *argv[])
     {
         error("ERROR opening socket");
     }
-    if (setsockopt(sockfd, SOL_SOCKET, SO_KEEPALIVE, &opt, sizeof(opt)))
-    {
-        perror("setsockopt");
-        exit(EXIT_FAILURE);
-    }
+    // if (setsockopt(sockfd, SOL_SOCKET, SO_KEEPALIVE, &opt, sizeof(opt)))
+    // {
+    //     perror("setsockopt");
+    //     exit(EXIT_FAILURE);
+    // }
 
     bzero((char *) &serv_addr, sizeof(serv_addr));
     serv_addr.sin_family = AF_INET;
